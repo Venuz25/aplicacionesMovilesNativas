@@ -1,0 +1,73 @@
+package com.example.examplecode
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            InicioSesion()
+        }
+    }
+}
+
+@Composable
+fun InicioSesion() {
+    // --- SECCIÓN DE FUNCIONALIDAD (ESTADO) ---
+    var mensaje by remember { mutableStateOf("Ingresa tus datos") }
+
+    Column(modifier = Modifier.padding(32.dp)) {
+
+        // --- SECCIÓN DE DISEÑO VISUAL ---
+        Text(
+            text = "Bienvenido",
+            fontSize = 32.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF6200EA)
+        )
+        Text(
+            text = mensaje,
+            fontSize = 16.sp,
+            color = Color.Gray,
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            label = { Text("Correo electrónico") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // --- SECCIÓN MIXTA: DISEÑO Y FUNCIONALIDAD JUNTOS ---
+        Button(
+            // 1. FUNCIONALIDAD
+            onClick = {
+                mensaje = "Cargando... "
+            },
+            // 2. DISEÑO VISUAL
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6200EA)),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "Iniciar Sesión", color = Color.White)
+        }
+    }
+}
+
+// Visualizador
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun PreviewLogin() {
+    InicioSesion()
+}

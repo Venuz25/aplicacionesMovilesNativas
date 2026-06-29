@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- SECCIÓN ESPECIFICAMENTE DE DISEÑO VISUAL -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bienvenido"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="#6200EA" />
+
+    <TextView
+        android:id="@+id/textoMensaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingresa tus datos"
+        android:textSize="16sp"
+        android:textColor="#888888"
+        android:layout_marginBottom="24dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Correo electrónico"
+        android:inputType="textEmailAddress" />
+
+    <Button
+        android:id="@+id/botonIniciar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#6200EA"
+        android:text="Iniciar Sesión" />
+
+</LinearLayout>
+
+
+----------------------------------------------------------------------
+package com.example.examplexml
+
+import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+
+    // --- SECCIÓN ESTRICTAMENTE DE FUNCIONALIDAD ---
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Le decimos a este archivo que su diseño visual es el archivo XML
+        setContentView(R.layout.activity_main)
+
+        // Atrapamos los elementos visuales usando los IDs que pusimos en el XML
+        val textoMensaje = findViewById<TextView>(R.id.textoMensaje)
+        val botonIniciar = findViewById<Button>(R.id.botonIniciar)
+
+        // Le programamos qué hacer al detectar un clic
+        botonIniciar.setOnClickListener {
+            textoMensaje.text = "Cargando... "
+        }
+    }
+}
